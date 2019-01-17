@@ -1,0 +1,110 @@
+---
+title: "Getting Started with R"
+author: "Carmelita DeLeon"
+date: "January 15, 2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Hello
+## This is my GEOG458 Assignment 1
+### I hope you enjoy!
+
+This is *carmelitadeleon*'s first assignment for **Geog458**. Our course page can be accessed [here](https://canvas.uw.edu/courses/1269928).
+
+![Seattle is a great city to live in!](https://cdn.pixabay.com/photo/2015/08/01/13/47/seattle-870282_1280.jpg)
+
+
+This is the equation to find the area of a triangle: \[ A = 1/2 * b * h \]
+
+Name          | Age
+------------- | -------------
+Homer         | 36
+Marge         | 34
+Bart          | 10
+Data from: [Reference](https://www.thoughtco.com/age-of-homer-marge-bart-lisa-135494)
+
+
+```{r task_six}
+library(rmarkdown)
+100 / 10 + 2
+100 / (10 + 2)
+print("The second equation has parentheses.")
+
+100 + 100 * (3 + 4) / 2
+(100 + 100) * 3 + 4 / 2 * (5 - 7) + 20
+100 + 500 * 3 + 4 - 2
+```
+
+```{r task_seven}
+x <- 8 * 3
+x + 10
+
+y <- 5
+z <- 8
+
+2 * x + 6 - y + 5 + z
+y + 60 - 20 + x - z
+z - y + 100
+```
+
+```{r task_eight}
+one_to_thirty <-seq(from = 1, to = 30)
+people <- c("Asuna","Kirito","Yuki","Leefa")
+
+length(one_to_thirty)
+length(people)
+
+sum(one_to_thirty)
+# sum(people)
+print("Answer: You cannot add up a vector of strings but you can add up a vector of numbers")
+```
+
+```{r task_nine}
+one_to_five <- seq(from = 1, to = 5)
+six_to_ten <- seq(from = 6, to = 10)
+
+sum_seq <- one_to_five + six_to_ten
+sum_seq
+
+product_seq <- one_to_five * six_to_ten
+```
+
+```{r task_ten}
+combined_seq <- c(one_to_five, six_to_ten)
+
+matrix_seq <- rbind(one_to_five, six_to_ten, product_seq)
+matrix_seq
+
+matrix_df <- as.data.frame(matrix_seq)
+matrix_df
+```
+
+## Loading the Data 
+This is how to load data into R and how to convert it
+
+```{r task_12_to_14, echo=TRUE}
+library(tidyverse)
+file_name <- read.csv("China_EO_49to17.csv")
+china_data <- as_tibble(file_name)
+china_data <- arrange(china_data, desc(Year))
+
+shanghai_and_beijing <- china_data %>% 
+                        filter(Year >= 2000) %>% 
+                        select(Year,
+                               Beijing_Enterprise,
+                               Beijing_Output,
+                               Shanghai_Enterprise,
+                               Shanghai_Output)
+shanghai_and_beijing
+
+shanghai_and_beijing_data <- shanghai_and_beijing %>%
+                              mutate(Output_Ratio = Beijing_Output/Shanghai_Output)
+
+shanghai_and_beijing_data
+```
+
